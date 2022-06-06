@@ -45,6 +45,9 @@
       samplerFx1Enable: 0x26,samplerFx2Enable: 0x27,
       select: 0x10,
       movefocus: 0x11,
+      fx11Enable: 0x0B,
+      fx11Select: 0x0C,
+      fx11Level: 0x0D,
     }
 
     for(knob in this.ctrls.knobs)
@@ -180,6 +183,26 @@
       group: '[Library]',
       key: 'MoveFocusForward',
       type: components.Button.prototype.types.push,
+    });
+
+    this.fx11Enable = new components.Button({
+      midi: [0xB0 + this.midiChannel, this.ctrls.fx11Enable],
+      group: '[EffectRack1_EffectUnit1_Effect1]',
+      key: 'enabled',
+      type: components.Button.prototype.types.toggle,
+    });
+
+    this.fx11Select = new components.Button({
+      midi: [0xB0 + this.midiChannel, this.ctrls.fx11Select],
+      group: '[EffectRack1_EffectUnit1_Effect1]',
+      key: 'next_effect',
+      type: components.Button.prototype.types.push,
+    });
+
+    this.fx11Level = new components.Pot({
+      midi: [0xB0 + this.midiChannel, this.ctrls.fx11Level],
+      group: '[EffectRack1_EffectUnit1_Effect1]',
+      key: 'meta',
     });
   };
 
