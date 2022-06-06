@@ -31,10 +31,8 @@
 ;(function (global){
   Jog = function(options)
   {
-    this.mode = "track";
     this.jogTimer = 0;
     this.rateTimeout = 200;
-    this.browseTimeout =100;
     this.searchSpeedSlow = 1;
     this.searchSpeedFast = 3;
     this.scratchRate = 1;
@@ -46,67 +44,7 @@
 
   _.assign(Jog,components.Encoder);
 
-  Jog.prototype.setMode = function(mode)
-  {
-    this.mode = mode;
-  }
-
-  Jog.prototype.isBrowseMode = function()
-  {
-    return this.mode == "browse";
-  }
-
-  Jog.prototype.toggleBrowse = function()
-  {
-    this.mode = (this.mode == "track") ? "browse" : "track";
-  }
-
-
   Jog.prototype.input =  function(channel, control, value, status, group) {
-    switch(this.mode)
-    {
-      case "browse":
-        this.browseMode(value);
-        break;
-      case "track":
-      default:
-      this.trackMode(value);
-    }
-  };
-
-  Jog.prototype.browseMode = function(value)
-  {
-    if ( this.jogTimer !== 0 ) return; // we are timed out return
-
-      this.jogTimer = engine.beginTimer(this.browseTimeout, function(){
-        this.jogTimer = 0;
-      }, true); //one shot
-
-    if (value == 0) {
-        if (this.isShifted)
-        {
-          //engine.setValue('[Library]', 'MoveFocusBackward', true);
-          //MoveFocusBackward ( SHIFT+TAB ) iterates through the loop length
-          //and beat jump length spinners as well as the library panes.
-          //While this could be useful, it's kinda confusing and , more often than not,
-          //results in setting odd loop lengths by mistake.
-          //SO we'll just go forward, ever forward....
-            engine.setValue('[Library]', 'MoveFocusForward', true);
-        }else{
-          engine.setValue('[Library]', 'MoveUp', true);
-        }
-    } else {
-      if (this.isShifted)
-      {
-        engine.setValue('[Library]', 'MoveFocusForward', true);
-      }else{
-        engine.setValue('[Library]', 'MoveDown', true);
-      }
-    }
-  }
-
-  Jog.prototype.trackMode = function(value)
-  {
     var currently_playing = engine.getValue(this.group, 'play');
     var deck = this.deckNumber();
 
@@ -143,7 +81,7 @@
         }
         engine.setValue(this.group, 'jog', speed);
     }
-  }
+  };
 
   Jog.prototype.deckNumber = function()
   {

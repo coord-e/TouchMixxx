@@ -40,7 +40,7 @@
         simpleButtons: {rate_temp_down: 0x0C, rate_temp_up: 0x0D, rate_perm_down_small: 0x0E, rate_perm_up_small: 0x0F,},
         simpleToggles: {pfl: 0x03, quantize:0x28 ,keylock:0x29, slip_enabled: 0x2A,},
         eq:{parameter1: 0x06,parameter2: 0x07,parameter3: 0x08,},
-        qfx:{super1:0x09},browse: 0x10, load: 0x11, VUMeterL: 0x12,VUMeterR: 0x13,
+        qfx:{super1:0x09}, load: 0x11, VUMeterL: 0x12,VUMeterR: 0x13,
         padModeOffset:0x14/* 0x1B */, padOffset:0x1C /*0x23 */,
         fx1Enable: 0x24, fx2Enable: 0x25,
         orientation: 0x26, loopExit: 0x27,
@@ -163,31 +163,13 @@
 
       var thisDeck = this;
 
-      this.addComponent('browse', {
-        midi: [0xB0 + midiChannel, this.ctrlNumbers.browse],
-        group: this.group,
-        input: function(channel, control, value, status, group)
-        {
-          if(value)
-          {
-            thisDeck.components.jog.toggleBrowse();
-            this.output();
-          }
-        },
-        output: function()
-        {
-            midi.sendShortMsg(this.midi[0], this.midi[1], thisDeck.components.jog.isBrowseMode()* 127);
-        },
-      });
-
-
       this.addComponent('load', new components.Button({
         midi: [0xB0 + midiChannel, this.ctrlNumbers.load],
         group: this.group,
         inKey: 'LoadSelectedTrack',
         input: function(channel, control, value, status, group)
         {
-          if(! thisDeck.isPlaying() && thisDeck.components.jog.isBrowseMode() )
+          if(! thisDeck.isPlaying() )
           {
             components.Button.prototype.input.call(this,channel, control, value, status, group);
           }

@@ -294,16 +294,6 @@
                     <script-binding/>
                 </options>
             </control>
-            <!-- browse -->
-            <control>
-                <group>[Channel1]</group>
-                <key>TouchMixxx.decks[0].input</key>
-                <status>0xB0</status>
-                <midino>0x10</midino>
-                <options>
-                    <script-binding/>
-                </options>
-            </control>
             <!-- Load -->
             <control>
                 <group>[Channel1]</group>
@@ -687,16 +677,6 @@
                       <script-binding/>
                   </options>
               </control>
-              <!-- browse -->
-              <control>
-                  <group>[Channel2]</group>
-                  <key>TouchMixxx.decks[1].input</key>
-                  <status>0xB1</status>
-                  <midino>0x10</midino>
-                  <options>
-                      <script-binding/>
-                  </options>
-              </control>
               <!-- Load -->
               <control>
                   <group>[Channel2]</group>
@@ -1033,16 +1013,6 @@
                         <script-binding/>
                     </options>
                 </control>
-                <!-- browse -->
-                <control>
-                    <group>[Channel3]</group>
-                    <key>TouchMixxx.decks[2].input</key>
-                    <status>0xB2</status>
-                    <midino>0x10</midino>
-                    <options>
-                        <script-binding/>
-                    </options>
-                </control>
                 <!-- Load -->
                 <control>
                     <group>[Channel3]</group>
@@ -1375,16 +1345,6 @@
                   <key>TouchMixxx.decks[3].input</key>
                   <status>0xB3</status>
                   <midino>0x17</midino>
-                  <options>
-                      <script-binding/>
-                  </options>
-              </control>
-              <!-- browse -->
-              <control>
-                  <group>[Channel4]</group>
-                  <key>TouchMixxx.decks[3].input</key>
-                  <status>0xB3</status>
-                  <midino>0x10</midino>
                   <options>
                       <script-binding/>
                   </options>
