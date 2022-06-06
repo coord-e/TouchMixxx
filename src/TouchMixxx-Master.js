@@ -43,6 +43,8 @@
       VUMeterL: 0x12, VUMeterR: 0x13,
       fx1Enable: 0x24, fx2Enable: 0x25,
       samplerFx1Enable: 0x26,samplerFx2Enable: 0x27,
+      select: 0x10,
+      movefocus: 0x11,
     }
 
     for(knob in this.ctrls.knobs)
@@ -153,6 +155,31 @@
       midiL:[0xB0 + this.midiChannel, this.ctrls.VUMeterL],
       midiR:[0xB0 + this.midiChannel, this.ctrls.VUMeterR],
       group: this.group,
+    });
+
+    this.select = {
+      jogTimer: 0,
+      browseTimeout: 100,
+      input: function(channel, control, value, status, group) {
+        if ( this.jogTimer !== 0 ) return; // we are timed out return
+
+        this.jogTimer = engine.beginTimer(this.browseTimeout, function(){
+          this.jogTimer = 0;
+        }, true); //one shot
+
+        if (value == 0) {
+          engine.setValue('[Library]', 'MoveUp', true);
+        } else {
+          engine.setValue('[Library]', 'MoveDown', true);
+        }
+      },
+    };
+
+    this.movefocus = new components.Button({
+      midi: [0xB0 + this.midiChannel, this.ctrls.movefocus],
+      group: '[Library]',
+      key: 'MoveFocusForward',
+      type: components.Button.prototype.types.push,
     });
   };
 

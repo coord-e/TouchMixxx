@@ -150,6 +150,25 @@
                   <Script-Binding/>
               </options>
           </control>
+          <!-- browser -->
+          <control>
+              <group>[Master]</group>
+              <key>TouchMixxx.master.select.input</key>
+              <status>0xB9</status>
+              <midino>0x10</midino>
+              <options>
+                  <Script-Binding/>
+              </options>
+          </control>
+          <control>
+              <group>[Master]</group>
+              <key>TouchMixxx.master.movefocus.input</key>
+              <status>0xB9</status>
+              <midino>0x11</midino>
+              <options>
+                  <Script-Binding/>
+              </options>
+          </control>
           <control>
               <group>[Channel1]</group>
               <key>TouchMixxx.decks[0].input</key>
