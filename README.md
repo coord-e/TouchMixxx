@@ -17,6 +17,5 @@
 
 ## Unimplemented
 
-- Filter knob
 - Loop buttons
 - Beat FX
